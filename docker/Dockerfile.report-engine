@@ -1,0 +1,21 @@
+# Use Python 3 image
+FROM python:3.10
+
+# Set working directory inside the container
+WORKDIR /reportEngine
+
+# Copy Python files and dependencies
+COPY config/back/ config/requirements.txt ./
+
+# Install dependencies
+RUN apt-get update && apt-get install -y cron && pip install --no-cache-dir -r requirements.txt 
+
+# set up the cron. btw it's not working ! 
+COPY config/crontab /etc/cron.d/mycron
+RUN chmod 0644 /etc/cron.d/mycron && crontab /etc/cron.d/mycron
+
+# Expose port 5000
+EXPOSE 5001
+
+# Start cron and run the Python app
+CMD cron && python engine.py

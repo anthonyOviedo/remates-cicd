@@ -1,0 +1,51 @@
+ services:
+  report-viewer:
+    build:
+      context: .
+      dockerfile: Dockerfile.report-viewer
+    container_name: report-viewer
+    ports:
+      - "8081:8081"
+    # depends_on:
+    #   - python-app
+
+  report-engine:
+    build:
+      context: .
+      dockerfile: Dockerfile.report-engine
+    container_name: report-engine
+    ports:
+      - "5001:5001"
+
+  # grafana:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile.grafana
+  #   container_name: grafana
+  #   volumes:
+  #     - grafana-data:/var/lib/grafana
+  #   restart: unless-stopped
+  #   ports:
+  #     - "3000:3000"
+  #   depends_on:
+  #     - prometheus
+
+  # prometheus:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile.prometheus
+  #   container_name: prometheus
+  #   ports:
+  #     - "9090:9090"
+  #   volumes:
+  #     - prometheus-data:/prometheus
+  #   restart: unless-stopped
+  #   command: --config.file=/etc/prometheus/prometheus.yml
+
+  # volumes:
+  #   prometheus-data:
+  #     driver: local
+  #   grafana-data:
+  #     driver: local
+
+

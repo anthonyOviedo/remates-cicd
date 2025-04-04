@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle de la propiedad</title>
+    <style>
+         .expandable {
+            max-height: 100px;
+            overflow: hidden;
+            transition: max-height 0.3s ease-in-out;
+        }
+        .expanded {
+            max-height: none;
+        }
+        
+        .expand-btn {
+            color: #007bff;
+            cursor: pointer;
+            display: block;
+            margin-top: 5px;
+        }
+        .dates {
+            background: #e9ecef;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+
+        #property-details {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .label {
+            font-weight: bold;
+        }
+
+        .highlight {
+            color: #2d9cdb;
+            font-weight: bold;
+        }
+
+        .favorite-btn {
+            font-size: 24px;
+            color: gold;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .expand-btn {
+            color: #2d9cdb;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Detalle de la propiedad</h1>
+
+   
+
+    <div id="property-details">
+        
+        <!-- Dynamic content will be injected here -->
+    </div>
+
+    <div id="plano">
+    </div>
+
+    <script>
+        // Get parameters from the URL
+        const params = new URLSearchParams(window.location.search);
+        let data = JSON.parse(localStorage.getItem('data')) || [];
+        let item = data.find(item => item.id === params.get('item'));
+    
+        function refresh() {
+            fetch('/data')
+                .then(response => response.json())
+                .then(data => {
+                    items = data;
+                    localStorage.setItem('data', JSON.stringify(items));
+                    loadItem(items.find(item => item.id === params.get('item')))
+                })
+                .catch(error => console.error('Error fetching data:', error));
+            console.log("refrescando");
+        }
+    
+        function loadItem(item) {
+            if (!item) {
+                item = data.find(item => item.id === params.get('item'));
+            }
+            // Dynamically inject property details into the HTML
+            document.getElementById('property-details').innerHTML = `
+                <div id="tools">
+                    <button onclick="window.location.href='/'">Atrás</button>
+                    <button onclick="refresh()">Actualizar</button>
+                    <button onclick="save()">Guardar</button>
+                </div>
+                <h2>${item.ubicacion}</h2>
+                <label class="label">Precio:</label>
+                <input type="number" id="property-price" value="${item.precio}"  />
+                <label class="label">Uso:</label>
+                <input type="text" id="property-uso" value="${item.uso}"  />
+                <label class="label">Ubicación:</label>
+                <input type="text" id="property-ubicacion" value="${item.ubicacion}"  />
+                <label class="label">Medidas:</label>
+                <input type="number" id="property-medidas" value="${item.medidas}"  />
+                <label class="label">Plano:</label>
+                <input type="text" id="property-plano" value="${item.plano}"  />
+                <label class="label">Matricula:</label>
+                <input type="text" id="property-matricula" value="${item.matricula}"  />
+                <label class="label">Expediente:</label>
+                <input type="text" id="property-exp" value="${item.exp}"  />
+                <label class="label">Juzgado:</label>
+                <input type="text" id="property-juzgado" value="${item.juzgado}"  />
+                <button class="favorite-btn" id="favorite-btn">☆</button>
+                <div class="dates">
+                    <p><strong>Primera fecha:</strong> ${item.primera_fecha}  <span class="highlight">${item.precio.toLocaleString()} CRC</span></p>
+                    <p><strong>Segunda fecha:</strong> ${item.segunda_fecha} <span class="highlight">${(item.precio * 0.75).toLocaleString()} CRC</span> </p>
+                    <p><strong>Tercera fecha:</strong> ${item.tercera_fecha} <span class="highlight">${(item.precio * 0.25).toLocaleString()} CRC</span></p>
+                </div>
+                <div>
+                    <p class="label">Detalles:</p>
+                    <p class="expandable" id="rawdetails">${item.raw}</p>
+                    <span class="expand-btn" onclick="toggleExpand(this)">Ver más</span>
+                </div>
+            `;
+        }
+    
+        // Function to toggle favorite
+        function toggleFavorite(remate) {
+            remate.favorito = remate.favorito ? false : true;
+            // Send the update to the server
+            fetch('/update-property', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ data: remate })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Server returned ${response.status} ${response.statusText}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Server response:', data);
+                if (showingFavorites) {
+                    showFavorites(); // Re-render favorites list to update button
+                } else {
+                    refresh();  //Re-render all.
+                }
+            })
+            .catch(error => console.error('Error sending favorite update:', error));
+        }
+    
+        function toggleExpand(btn) {
+            const details = document.getElementById("rawdetails");
+            details.classList.toggle('expanded');
+            btn.textContent = details.classList.contains('expanded') ? "Ver menos" : "Ver más";
+        }
+    
+        // Function to send updated data to server
+        function save() {
+            item.precio = document.getElementById('property-price').value;
+            item.uso = document.getElementById('property-uso').value;
+            item.ubicacion = document.getElementById('property-ubicacion').value;
+            item.medidas = document.getElementById('property-medidas').value;
+            item.plano = document.getElementById('property-plano').value;
+            item.matricula = document.getElementById('property-matricula').value;
+            item.exp = document.getElementById('property-exp').value;
+            item.juzgado = document.getElementById('property-juzgado').value;
+            fetch('/update-property', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ data: item })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Server returned ${response.status} ${response.statusText}`);
+                }
+                return response.json();
+            })
+            .catch(error => console.error('Error sending favorite update:', error));
+        }
+    
+        document.addEventListener("DOMContentLoaded", refresh);
+    </script>
+</body>
+</html>

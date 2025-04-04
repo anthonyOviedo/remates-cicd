@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Remates</title>
+    <link rel="stylesheet" href="public/index.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>Lista de Remates</h1>
+
+    <div>
+        <label for="province-filter">Filtrar por Cotenido:</label>
+        <input type="text" oninput="refresh()" id="province-filter" placeholder="Escriba una palabra...">
+        <div id="filtered-count"></div>
+    </div>
+
+    <div id="remates-list"></div>
+
+</div>
+
+<div class="footer">
+    <button id="show-favorites">Mostrar Favoritos</button>
+    <button id="show-all">Mostrar Todos</button>
+
+</div>
+
+<script src="public/index.js"></script>
+</body>
+</html>

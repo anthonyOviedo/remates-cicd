@@ -1,0 +1,220 @@
+/* index.css */
+button {
+    margin-right: 10px; /* Default space for all buttons */
+}
+
+.table-item {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.table-item:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.table-data {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.favorite-btn {
+    background-color: #ffcc00;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.favorite-btn:hover {
+    background-color: #ffb800;
+}
+
+
+.remove-fav-btn
+{
+    background-color: #ffb900;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+}
+.remove-fav-btn:hover{
+    background-color: #ffb100;
+}
+
+.remove-fav-btn.is-favorite {
+    background-color: #ffb800;
+    color: #000;
+}
+
+
+.favorite-btn.is-favorite {
+    background-color: #ffb800;
+    color: #000;
+}
+
+.detalle {
+    background-color: #4CAF50;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.detalle:hover {
+    background-color: #45a049;
+}
+
+
+.expandable {
+    max-height: 100px;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out;
+}
+.expanded {
+    max-height: none;
+}
+
+.expand-btn {
+    color: #007bff;
+    cursor: pointer;
+    display: block;
+    margin-top: 5px;
+}
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    padding: 20px;
+    background-color: #f4f4f4;
+}
+.container {
+    max-width: 900px;
+    margin: auto;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+h1 {
+    text-align: center;
+    color: #333;
+}
+.auction-item {
+    background: #fff;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+    border-left: 5px solid #007bff;
+    position: relative;
+}
+.label {
+    font-weight: bold;
+}
+.favorite-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #ffcc00;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.footer {
+    text-align: center;
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-around;
+    background: #007bff;
+    padding: 10px;
+    color: white;
+    position: sticky;
+    bottom: 0;
+}
+.footer button {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+.highlight {
+    color: #d9534f;
+    font-weight: bold;
+}
+.dates {
+    background: #e9ecef;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100vw; /* Full viewport width */
+    height: 100vh; /* Full viewport height */
+    background-color: rgba(0, 0, 0, 0.7); /* Darker background for better focus */
+    overflow: hidden; /* Hide scrolling */
+    padding: 0; /* Remove extra spacing */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Modal Content */
+.modal-content {
+    width: 100%;
+    height: 100%;
+    background: white;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+/* Close Button */
+.close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 30px;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: red;
+}
+.close {
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    top: 5px;
+    right: 15px;
+    cursor: pointer;
+}
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
