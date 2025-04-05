@@ -57,44 +57,37 @@ function renderItems() {
 
     toRender.forEach((item, index) => listContainer.appendChild(createAuctionItem(item, index)));
 }
-
+function verMas(itemId) {
+    if (itemId) {
+        window.location.href = `/detalle?item=${encodeURIComponent(itemId)}`;
+    }
+}
 function createAuctionItem(item, index) {
     const div = document.createElement('div');
-    div.classList.add('auction-item');
+    div.classList.add('auction-item'); // <--- ADD THIS
+
     div.innerHTML = `
-        <p><span class="label">Uso:</span> ${item.uso}</p>
         <p><span class="label">Ubicación:</span> ${item.ubicacion}</p>
         <p><span class="label">Medidas:</span> ${item.medidas} m²</p>
-        <p><span class="label">Plano:</span> ${item.plano}</p>
         <p><span class="label">Matricula:</span> ${item.matricula}</p>
-        <p><span class="label">Expediente:</span> ${item.exp}</p>
         <p><span class="label">Juzgado:</span> ${item.juzgado}</p>
         <button class="favorite-btn" data-id="${item.id}">
             ${item.favorito ? '★' : '☆'}
         </button>
         <div class="dates">
             <p><strong>Primera fecha:</strong> ${item.primera_fecha} <span class="highlight">${item.precio.toLocaleString()} CRC</span></p>
-            <p><strong>Segunda fecha:</strong> ${item.segunda_fecha} <span class="highlight">${(item.precio * 0.75).toLocaleString()} CRC</span></p>
-            <p><strong>Tercera fecha:</strong> ${item.tercera_fecha} <span class="highlight">${(item.precio * 0.25).toLocaleString()} CRC</span></p>
         </div>
-        <div>
-            <p class="label">Detalles:</p>
-            <p class="expandable" id="details-${index}">${item.raw}</p>
-            <span class="expand-btn" data-index="${index}">Ver más</span>
-        </div>
+
+        <button  type="button"  class="btn btn-primary" onclick=verMas(${item.id}) data-id="${item.id}">
+            Ver más
+        </button>
     `;
 
     div.querySelector(".favorite-btn").addEventListener("click", () => toggleFavorite(item.id));
-
-    const expandBtn = div.querySelector(".expand-btn");
-    expandBtn.addEventListener("click", () => {
-        const details = document.getElementById(`details-${index}`);
-        details.classList.toggle('expanded');
-        expandBtn.textContent = details.classList.contains('expanded') ? "Ver menos" : "Ver más";
-    });
-
     return div;
 }
+
+
 
 function toggleFavorite(id) {
     const remate = allData.find(r => r.id === id);

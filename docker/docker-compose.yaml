@@ -1,4 +1,4 @@
- services:
+services:
   report-viewer:
     build:
       context: .
@@ -6,7 +6,7 @@
     container_name: report-viewer
     ports:
       - "8081:8081"
-    # depends_on:
+    # depends_on: 
     #   - python-app
 
   report-engine:
@@ -16,6 +16,8 @@
     container_name: report-engine
     ports:
       - "5001:5001"
+    volumes: # Added this section
+      - ./config/back/data:/reportEngine/data # Maps local './data' to '/reportEngine/data' in the container
 
   # grafana:
   #   build:

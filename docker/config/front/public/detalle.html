@@ -13,7 +13,6 @@
         .expanded {
             max-height: none;
         }
-        
         .expand-btn {
             color: #007bff;
             cursor: pointer;
@@ -27,13 +26,16 @@
             margin-top: 10px;
         }
         body {
+            background-image: url('public/beach.jpeg'); /* Path is relative to this CSS file */
             font-family: Arial, sans-serif;
             margin: 20px;
-            background-color: #f4f4f4;
+            background-color: #f4f4f4; /* Fallback color if the image doesn't load */
+            background-size: cover; /* Optional: Scales the image to cover the entire background */
+            background-repeat: no-repeat; /* Optional: Prevents the image from repeating */
         }
 
         h1 {
-            color: #333;
+            color: #f7f7f7;
             text-align: center;
         }
 
@@ -80,10 +82,8 @@
     </style>
 </head>
 <body>
-
     <h1>Detalle de la propiedad</h1>
-
-   
+    <br>
 
     <div id="property-details">
         
@@ -96,25 +96,59 @@
     <script>
         // Get parameters from the URL
         const params = new URLSearchParams(window.location.search);
-        let data = JSON.parse(localStorage.getItem('data')) || [];
-        let item = data.find(item => item.id === params.get('item'));
-    
+        let data = [];
+        let item = null;
+
+        // Fetch data from server instead of using localStorage
+    // Fix the initial fetch:
+        fetch('/data')
+            .then(res => res.json())
+            .then(fetchedData => {
+            data = fetchedData; // Store in the data variable
+            item = data.find(item => item.id === params.get('item'));
+            if (item) {
+                loadItem(item);
+            }
+        })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+                data = [];
+        });
+
+        // In refresh function, add let:
         function refresh() {
             fetch('/data')
                 .then(response => response.json())
-                .then(data => {
-                    items = data;
+                .then(fetchedData => {
+                    let items = fetchedData; // Add 'let' here
                     localStorage.setItem('data', JSON.stringify(items));
-                    loadItem(items.find(item => item.id === params.get('item')))
+                    loadItem(items.find(item => item.id === params.get('item')));
                 })
                 .catch(error => console.error('Error fetching data:', error));
-            console.log("refrescando");
         }
-    
+
+        // Function to show favorites
+        function showFavorites() {
+            const favorites = data.filter(item => item.favorito);
+            document.getElementById('property-details').innerHTML = '';
+            favorites.forEach(item => loadItem(item));
+        }
+
+        // Event listener for favorite button
+        document.addEventListener('click', function(event) {
+            if (event.target.classList.contains('favorite-btn')) {
+                const itemId = event.target.closest('.property-item').dataset.id;
+                const item = data.find(item => item.id === itemId);
+                toggleFavorite(item);
+            }
+        });
+
+        // Add event delegation for favorite button or add listener in loadItem
         function loadItem(item) {
             if (!item) {
                 item = data.find(item => item.id === params.get('item'));
             }
+            console.log(item);
             // Dynamically inject property details into the HTML
             document.getElementById('property-details').innerHTML = `
                 <div id="tools">
@@ -122,6 +156,7 @@
                     <button onclick="refresh()">Actualizar</button>
                     <button onclick="save()">Guardar</button>
                 </div>
+ 
                 <h2>${item.ubicacion}</h2>
                 <label class="label">Precio:</label>
                 <input type="number" id="property-price" value="${item.precio}"  />

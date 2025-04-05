@@ -8,7 +8,7 @@ app.secret_key = "your_secret_key"  # Required for session management
 BACK_SERVER = 'http://report-engine:5001'
 
 # Dummy user database (replace with a real database)
-USERS = {"minor@oviedo": "88137504", "estiven@oviedo": "87530890", "antony@oviedo": "87898967"}
+USERS = {"juan@barrantes": "83670583","minor@oviedo": "88137504", "estiven@oviedo": "87530890", "antony@oviedo": "87898967"}
 
 # Middleware to check login
 def login_required(func):
@@ -64,7 +64,7 @@ def get_pdf():
     try:
         response = requests.get(f"{BACK_SERVER}/download/{matricula}pdf")
         response.raise_for_status()
-        return send_file(io.BytesIO(response.content), mimetype="application/pdf", as_attachment=True, download_name=f"{matricula}.pdf")
+        return send_file(io.BytesIO(response.content), mimetype="application/pdf", as_attachment=True, download_name=f"{matricula}.pdf") # type: ignore
     except requests.RequestException as error:
         return jsonify({"error": "Failed to fetch PDF", "details": str(error)}), 500
 

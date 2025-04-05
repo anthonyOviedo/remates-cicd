@@ -41,7 +41,6 @@ def get_remates():
 
 @app.route('/remates', methods=['POST'])
 def add_remate():
-    
     """Receive a new remate and add it to remates.json.
     Ensures the remate exists; updates if found, creates if not.
     """
@@ -51,18 +50,19 @@ def add_remate():
 
     # Load existing remates
     remates = load_remates()
+    new_remate = data.get('data', data)
+    updated_existing = False  # Initialize updated_existing here
 
-    # Find the remate to update
-    updated_existing = False
     for i, remate in enumerate(remates):
-        if remate.get('id') == data.get('id'):
-            remates[i] = data  # Override
+        if remate.get('id') == new_remate.get('id'):
+            remates[i] = new_remate  # Override the entire existing remate
             updated_existing = True
             break
 
-    # If the remate was not found, add it.
+    # If the remate was not found, add it directly (without the 'data' layer).
     if not updated_existing:
-        remates.append(data)
+        # Use .get('data', data) to handle cases with or without the nested 'data' key
+        remates.append(new_remate)
 
     # Save back to file
     save_remates(remates)

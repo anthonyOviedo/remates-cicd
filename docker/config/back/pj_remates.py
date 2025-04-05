@@ -6,7 +6,7 @@ import json
 class Remate:
     def __init__(self, exp=None, precio=None, medidas=None, ubicacion=None, uso=None, 
                  primera_fecha=None, segunda_fecha=None, tercera_fecha=None, candidato=None, 
-                 raw=None, plano=None, url=None, matricula=None, id=None, favorito=None):
+                 raw=None, plano=None, url=None, matricula=None, id=None, favorito=None, juzgado=None):
         # Inicializar los atributos, si no se pasa ningún valor se usan valores predeterminados (None)
         self.id = id 
         self.exp = exp
@@ -23,6 +23,7 @@ class Remate:
         self.url = url
         self.matricula = matricula
         self.favorito = False
+        self.juzgado = juzgado
     
     def __str__(self):
         precio_ = precioFormatter(self.precio)
@@ -56,7 +57,9 @@ def to_dict(remate):
             'plano': remate.plano,
             'raw': remate.raw,
             'url': remate.url,
-            'favorito': remate.favorito
+            'favorito': remate.favorito,
+            'juzgado': remate.juzgado
+            
         }
 
 def precioFormatter(precio):
@@ -425,7 +428,8 @@ def proccesRematesJson(remates_json):
 
     except Exception as e:
        print("Errorwq : {e}")
-    
+
+
 def createRemate(remate):
     try:
         if isFinca(remate.raw):
@@ -439,6 +443,8 @@ def createRemate(remate):
             remate.plano = getPlano(remate.raw)
             remate.matricula = getMatricula(remate.raw)
             remate.url = f"https://nexuspj.poder-judicial.go.cr/document/{remate.exp}"
+            remate.favorito = False
+            remate.juzgado = getJuzgado(remate.raw)
             
         else :
             remate.candidato = False        
@@ -447,6 +453,15 @@ def createRemate(remate):
     except Exception as e:
         print(f"Error: {e}")
 
+def getJuzgado(text):
+    # Regex to match the "Juzgado" line
+    pattern = r"(JUZGADO\s.*?)(?=\.)"
+    match = re.search(pattern, text)
+    if match:
+        return match.group(0).strip()
+    else:
+        return 'not found'
+    
 def getId(text):
     match = re.search(r"Referencia N°:\s*(\d+)", text)
 
@@ -581,8 +596,8 @@ def main():
     
     data = sync_data()    
     for item in data:
-        item['favorito'] = False
-        print(str(item['favorito']) + " - " +item['id'] )
+        item['juzgado'] = getJuzgado(item['raw'])
+        print(str(item['juzgado']) + " - " +item['id'] )
     
     with open('data/remates.json', 'w') as f:   
         f.write(json.dumps(data))

@@ -1,8 +1,8 @@
 /* index.css */
+
 button {
     margin-right: 10px; /* Default space for all buttons */
 }
-
 .table-item {
     padding: 10px;
     border-bottom: 1px solid #ddd;
@@ -18,6 +18,7 @@ button {
 .table-data {
     flex: 1;
     margin-right: 10px;
+    text-align: left; /* Align text to the left in table data */
 }
 
 .favorite-btn {
@@ -67,6 +68,7 @@ button {
     cursor: pointer;
     border-radius: 5px;
     font-size: 16px;
+    margin-left: auto; /* Push "Ver más" button to the right */
 }
 
 .detalle:hover {
@@ -90,32 +92,67 @@ button {
     margin-top: 5px;
 }
 body {
-    font-family: Arial, sans-serif;
-    margin: 20px;
-    padding: 20px;
-    background-color: #f4f4f4;
+    font-family: sans-serif;
+    background-image: url('loginback.jpeg'); /* Ensure this path is correct */
+    /* Removed background-size: cover; */
+    background-repeat: repeat; /* This will create the mosaic effect if the image is smaller */
+    background-position: center; /* Center the starting position of the image */
+    min-height: 100vh; /* Ensure the background covers the full viewport height */
+    display: flex;
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
+    margin: 0; /* Remove default body margin */
+    padding: 20px; /* Add some padding for smaller screens */
+    box-sizing: border-box; /* Include padding in element's total width and height */
 }
+
 .container {
-    max-width: 900px;
-    margin: auto;
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 100%; /* Ensure it takes full width */
+    max-width: 500px; /* Increased max width for better readability */
+    box-sizing: border-box; /* Include padding in the element's total width/height */
+    margin: 20px; /* Adjust margin for better spacing */
 }
+
+
 h1 {
     text-align: center;
     color: #333;
+    margin-bottom: 20px; /* Add some space below the title */
 }
+
+
+.auction-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive cards with a minimum width */
+    gap: 20px; /* Increased gap for better spacing */
+}
+
 .auction-item {
     background: #fff;
-    padding: 15px;
-    margin-bottom: 15px;
+    padding: 20px; /* Increased padding */
     border-radius: 8px;
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
-    border-left: 5px solid #007bff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Slightly stronger shadow */
     position: relative;
+    display: flex;
+    flex-direction: column; /* Stack content vertically */
 }
+
+.auction-item > * { /* Apply to all direct children */
+    text-align: left; /* Align text to the left within each card */
+    margin-bottom: 5px; /* Add some spacing between text elements */
+}
+
+.auction-item .detalle {
+    margin-left: auto; /* Push "Ver más" button to the right */
+    margin-top: 10px; /* Add some space above the button */
+}
+
+
 .label {
     font-weight: bold;
 }
@@ -125,49 +162,59 @@ h1 {
     right: 10px;
     background: #ffcc00;
     border: none;
-    padding: 5px 10px;
+    padding: 8px 12px; /* Slightly larger padding */
     cursor: pointer;
     border-radius: 5px;
+    font-size: 1rem; /* Use rem for better scalability */
 }
 .footer {
     text-align: center;
-    margin-top: 20px;
-    display: flex;
-    justify-content: space-around;
-    background: #007bff;
-    padding: 10px;
+    margin-top: 30px;
+    padding: 15px;
+    background-color: #007bff; /* Bootstrap primary color */
     color: white;
     position: sticky;
     bottom: 0;
+    left: 0;
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-around;
+    z-index: 999; /* Ensure it stays on top of other content */
 }
 .footer button {
     background: transparent;
     border: none;
     color: white;
-    font-size: 16px;
+    font-size: 1rem;
     cursor: pointer;
+    padding: 0; /* Remove default button padding */
+}
+.footer button:hover {
+    opacity: 0.8;
 }
 .highlight {
-    color: #d9534f;
+    color: #d9534f; /* Bootstrap danger color */
     font-weight: bold;
 }
 .dates {
-    background: #e9ecef;
+    background-color: #f8f9fa; /* Bootstrap light background */
     padding: 10px;
     border-radius: 5px;
     margin-top: 10px;
+    text-align: left; /* Align dates to the left */
 }
 /* Modal Styles */
 .modal {
     display: none;
     position: fixed;
-    z-index: 1000;
+    z-index: 1050; /* Higher z-index for Bootstrap modals */
     left: 0;
     top: 0;
     width: 100vw; /* Full viewport width */
     height: 100vh; /* Full viewport height */
     background-color: rgba(0, 0, 0, 0.7); /* Darker background for better focus */
-    overflow: hidden; /* Hide scrolling */
+    overflow: auto; /* Allow scrolling if content is too long */
     padding: 0; /* Remove extra spacing */
     display: flex;
     align-items: center;
@@ -176,45 +223,30 @@ h1 {
 
 /* Modal Content */
 .modal-content {
-    width: 100%;
-    height: 100%;
     background: white;
     padding: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    border-radius: 0.3rem; /* Bootstrap border-radius */
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15); /* Bootstrap box-shadow */
+    width: 90%; /* Adjust width as needed */
+    max-width: 600px; /* Maximum width for the modal */
     position: relative;
 }
 
 /* Close Button */
 .close {
     position: absolute;
-    top: 15px;
-    right: 20px;
-    font-size: 30px;
+    top: 10px;
+    right: 15px;
+    font-size: 1.5rem;
     font-weight: bold;
-    color: #333;
+    color: #000;
     cursor: pointer;
+    opacity: 0.5;
 }
 
 .close:hover {
-    color: red;
-}
-.close {
-    color: #aaa;
-    font-size: 28px;
-    font-weight: bold;
-    position: absolute;
-    top: 5px;
-    right: 15px;
-    cursor: pointer;
-}
-.close:hover,
-.close:focus {
-    color: black;
+    opacity: 0.75;
     text-decoration: none;
-    cursor: pointer;
+    color: #000;
 }
-
 

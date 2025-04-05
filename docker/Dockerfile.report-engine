@@ -17,5 +17,7 @@ RUN chmod 0644 /etc/cron.d/mycron && crontab /etc/cron.d/mycron
 # Expose port 5000
 EXPOSE 5001
 
+
+
 # Start cron and run the Python app
 CMD cron && python engine.py
