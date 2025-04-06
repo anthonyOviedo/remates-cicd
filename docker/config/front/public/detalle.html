@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detalle de la propiedad</title>
     <style>
-         .expandable {
+        .expandable {
             max-height: 100px;
             overflow: hidden;
             transition: max-height 0.3s ease-in-out;
@@ -64,6 +66,100 @@
             border: none;
             cursor: pointer;
         }
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px; /* Adjust padding for icon size */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.2em; /* Adjust icon size */
+            transition: background-color 0.3s ease;
+            margin-right: 5px; /* Add spacing between buttons */
+            }
+
+        button:hover {
+        background-color: #0056b3;
+        }
+
+        .form-container {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .label {
+            display: block;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 10px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: #4CAF50;
+        }
+
+        .input-field[type="number"] {
+            -moz-appearance: textfield;
+        }
+
+        .input-field[type="number"]::-webkit-outer-spin-button,
+        .input-field[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        .comments-section {
+            margin-top: 20px;
+            border-top: 2px solid #ddd;
+            padding-top: 20px;
+        }
+
+        .comments-section h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .comment {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #eee;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        .comment p {
+            margin: 5px 0;
+        }
+
+        .comment a {
+            color: #007BFF;
+            text-decoration: underline;
+        }
+
+        .comment a:hover {
+            text-decoration: none;
+        }
+
 
         .expand-btn {
             color: #2d9cdb;
@@ -86,12 +182,13 @@
     <br>
 
     <div id="property-details">
-        
-        <!-- Dynamic content will be injected here -->
+
     </div>
 
     <div id="plano">
     </div>
+
+
 
     <script>
         // Get parameters from the URL
@@ -104,12 +201,12 @@
         fetch('/data')
             .then(res => res.json())
             .then(fetchedData => {
-            data = fetchedData; // Store in the data variable
-            item = data.find(item => item.id === params.get('item'));
-            if (item) {
-                loadItem(item);
-            }
-        })
+                data = fetchedData; // Store in the data variable
+                item = data.find(item => item.id === params.get('item'));
+                if (item) {
+                    loadItem(item);
+                }
+            })
             .catch(error => {
                 console.error('Error fetching data:', error);
                 data = [];
@@ -142,52 +239,127 @@
                 toggleFavorite(item);
             }
         });
-
         // Add event delegation for favorite button or add listener in loadItem
         function loadItem(item) {
             if (!item) {
                 item = data.find(item => item.id === params.get('item'));
             }
             console.log(item);
+
             // Dynamically inject property details into the HTML
             document.getElementById('property-details').innerHTML = `
                 <div id="tools">
-                    <button onclick="window.location.href='/'">Atrás</button>
-                    <button onclick="refresh()">Actualizar</button>
-                    <button onclick="save()">Guardar</button>
+                    <button onclick="window.location.href='/'"><i class="fas fa-arrow-left"></i></button>
+                    <button onclick="aiopinion()"><i class="fas fa-robot"></i>Opinion IA</button>
+                    <button onclick="getReporte()">Obtener Reporte</button>
+
+                    
                 </div>
- 
+
                 <h2>${item.ubicacion}</h2>
-                <label class="label">Precio:</label>
-                <input type="number" id="property-price" value="${item.precio}"  />
-                <label class="label">Uso:</label>
-                <input type="text" id="property-uso" value="${item.uso}"  />
-                <label class="label">Ubicación:</label>
-                <input type="text" id="property-ubicacion" value="${item.ubicacion}"  />
-                <label class="label">Medidas:</label>
-                <input type="number" id="property-medidas" value="${item.medidas}"  />
-                <label class="label">Plano:</label>
-                <input type="text" id="property-plano" value="${item.plano}"  />
-                <label class="label">Matricula:</label>
-                <input type="text" id="property-matricula" value="${item.matricula}"  />
-                <label class="label">Expediente:</label>
-                <input type="text" id="property-exp" value="${item.exp}"  />
-                <label class="label">Juzgado:</label>
-                <input type="text" id="property-juzgado" value="${item.juzgado}"  />
-                <button class="favorite-btn" id="favorite-btn">☆</button>
+
+                <div class="details-group">
+                    <p><strong>Precio:</strong> ${item.precio.toLocaleString()} CRC</p>
+                    <p><strong>Uso:</strong> ${item.uso}</p>
+                    <p><strong>Ubicación:</strong> ${item.ubicacion}</p>
+                    <p><strong>Medidas:</strong> ${item.medidas}</p>
+                    <p><strong>Plano:</strong> ${item.plano}</p>
+                    <p><strong>Matricula:</strong> ${item.matricula}</p>
+                    <p><strong>Expediente:</strong> ${item.exp}</p>
+                    <p><strong>Juzgado:</strong> ${item.juzgado}</p>
+                </div>
+
                 <div class="dates">
                     <p><strong>Primera fecha:</strong> ${item.primera_fecha}  <span class="highlight">${item.precio.toLocaleString()} CRC</span></p>
                     <p><strong>Segunda fecha:</strong> ${item.segunda_fecha} <span class="highlight">${(item.precio * 0.75).toLocaleString()} CRC</span> </p>
                     <p><strong>Tercera fecha:</strong> ${item.tercera_fecha} <span class="highlight">${(item.precio * 0.25).toLocaleString()} CRC</span></p>
                 </div>
+
                 <div>
                     <p class="label">Detalles:</p>
                     <p class="expandable" id="rawdetails">${item.raw}</p>
                     <span class="expand-btn" onclick="toggleExpand(this)">Ver más</span>
                 </div>
+
+                <div class="comments-section">
+                    <h3>Comentarios</h3>
+                    ${item.comments && item.comments.length > 0 ? item.comments.map(comment => `
+                        <div class="comment">
+                            <p><strong>${comment.date}</strong></p>
+                            <p><strong>Usuario:</strong> ${comment.user}</p>
+                            <p><strong>Comentario:</strong> ${comment.comment}</p>
+                        </div>
+                    `).join('') : `<p>No hay comentarios.</p>`}
+                </div>
+
+                <div class="comments-section">
+                    <h3>Agregar Comentario</h3>
+                    <form id="comment-form">
+                        <textarea id="new-comment" placeholder="Escribe tu comentario..." rows="4"></textarea><br />
+                        <button onclick=save()>Comentar</button>
+                    </form>
+                </div>
             `;
+
+            // Handle the form submission
+            document.getElementById('comment-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                const commentText = document.getElementById('new-comment').value;
+
+                if (commentText.trim()) {
+                    const newComment = {
+                        date: new Date().toLocaleDateString(),
+                        user: "Usuario anónimo", // You can integrate user info here
+                        comment: commentText,
+                    };
+
+                    // Add the new comment to the item's comments array
+                    item.comments.push(newComment);
+
+                    // Re-render the item to display the updated comments
+                    loadItem(item);
+
+                    // Clear the input field
+                    document.getElementById('new-comment').value = '';
+                } else {
+                    alert("Por favor, ingresa un comentario.");
+                }
+            });
         }
-    
+
+        function getReporte() {
+            const url = `/reporte/${item.id}`;
+            fetch(url)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`Error: ${response.statusText}`);
+                    }
+                    return response.blob();
+                })
+                .then(blob => {
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = `reporte_${item.id}.pdf`;
+                    document.body.appendChild(a);
+                    a.click();
+                    a.remove();
+                })
+                .catch(error => console.error('Error downloading report:', error));
+        }
+        // IA opinion feature
+        function aiopinion(prompt) {
+            fetch('/ia', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ prompt })
+            })
+                .then(res => res.json())
+                .then(data => showAIResponse(data.response))
+                .catch(err => console.error('Error fetching AI response:', err));
+        }
+
         // Function to toggle favorite
         function toggleFavorite(remate) {
             remate.favorito = remate.favorito ? false : true;
@@ -215,23 +387,40 @@
             })
             .catch(error => console.error('Error sending favorite update:', error));
         }
-    
+
         function toggleExpand(btn) {
             const details = document.getElementById("rawdetails");
             details.classList.toggle('expanded');
             btn.textContent = details.classList.contains('expanded') ? "Ver menos" : "Ver más";
         }
-    
+
         // Function to send updated data to server
         function save() {
-            item.precio = document.getElementById('property-price').value;
-            item.uso = document.getElementById('property-uso').value;
-            item.ubicacion = document.getElementById('property-ubicacion').value;
-            item.medidas = document.getElementById('property-medidas').value;
-            item.plano = document.getElementById('property-plano').value;
-            item.matricula = document.getElementById('property-matricula').value;
-            item.exp = document.getElementById('property-exp').value;
-            item.juzgado = document.getElementById('property-juzgado').value;
+            const commentText = document.getElementById('new-comment').value;
+            // For now, we'll use a static "Usuario anónimo".
+            // In a real application, you'd likely have user authentication
+            // and retrieve the logged-in user's information.
+            const commentUser = "Usuario anónimo";
+
+            if (commentText.trim()) {
+                const newComment = {
+                    date: new Date().toLocaleDateString(),
+                    user: commentUser,
+                    comment: commentText,
+                };
+
+                // Add the new comment to the item's comments array
+                item.comments.push(newComment);
+
+                // Re-render the item to display the updated comments
+                loadItem(item);
+
+                // Clear the input field
+                document.getElementById('new-comment').value = '';
+            } else {
+                alert("Por favor, ingresa un comentario.");
+            }
+
             fetch('/update-property', {
                 method: 'POST',
                 headers: {
@@ -247,7 +436,7 @@
             })
             .catch(error => console.error('Error sending favorite update:', error));
         }
-    
+
         document.addEventListener("DOMContentLoaded", refresh);
     </script>
 </body>

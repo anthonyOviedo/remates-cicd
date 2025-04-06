@@ -1,1 +1,1 @@
-0 0 * * * python3 /home/tony/REMATES/DOKER/pj_remates.py >> /var/log/pj_remates.log
+0 0 * * * python3 /reportEngine/pj_remates.py

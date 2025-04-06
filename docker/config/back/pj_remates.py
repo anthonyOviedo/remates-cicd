@@ -24,6 +24,7 @@ class Remate:
         self.matricula = matricula
         self.favorito = False
         self.juzgado = juzgado
+        self.comments = [] 
     
     def __str__(self):
         precio_ = precioFormatter(self.precio)
@@ -586,21 +587,19 @@ def load_new_data(page):
 
 def main():
     #--Correr siempre, este es el que me los trae y guarda despues en json sin procesar
-    # remate_ouput = get_updated_remates(1)
-    # print(remate_ouput)
+    remate_ouput = get_updated_remates(1)
+    print(remate_ouput)
+    #--Esta funcion actualiza las veces publicado o agrega el nuevo Bien 
+    update_all(1)
+    
 
-    #esta funcion actualiza las veces publicado o agrega el nuevo Bien 
-    #update_all(1)
-    
     #--data rationalizer
-    
-    data = sync_data()    
-    for item in data:
-        item['juzgado'] = getJuzgado(item['raw'])
-        print(str(item['juzgado']) + " - " +item['id'] )
-    
-    with open('data/remates.json', 'w') as f:   
-        f.write(json.dumps(data))
+    # data = sync_data()    
+    # for item in data:
+    #     item['comments'] = []
+    # with open('data/remates.json', 'w') as f:   
+    #     f.write(json.dumps(data))
+    # print("file run successfully")
 
  
 if __name__ == '__main__':

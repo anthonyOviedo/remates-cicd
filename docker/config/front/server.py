@@ -85,7 +85,7 @@ def update_property():
 @app.route('/detalle', methods=['GET'])
 @login_required
 def detalle():
-    item_id = request.args.get('item')
+    item_id = request.args.get('item') 
     if not item_id:
         return "Item ID is required", 400
     return send_file("public/detalle.html")
