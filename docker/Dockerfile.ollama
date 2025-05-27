@@ -1,0 +1,8 @@
+FROM ollama/ollama:latest
+
+# Set environment variables to preload the DeepSeek-VL R1 model
+ENV OLLAMA_MODELS=deepseek-r1:7b
+
+# Optional: run the model on container startup
+CMD ["ollama", "run", "deepseek-r1:7b"]
+

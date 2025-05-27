@@ -87,8 +87,6 @@ function createAuctionItem(item, index) {
     return div;
 }
 
-
-
 function toggleFavorite(id) {
     const remate = allData.find(r => r.id === id);
     if (!remate) return;
@@ -115,17 +113,25 @@ function getClosestDate(item) {
 
 // IA opinion feature
 function aiopinion(prompt) {
-    fetch('/ia', {
+    const modal = document.getElementById('aiModal');
+    if (modal == ""){
+        fetch('/ia', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ prompt })
     })
         .then(res => res.json())
-        .then(data => showAIResponse(data.response))
+        .then(data => showAIResponse())
         .catch(err => console.error('Error fetching AI response:', err));
+    }
+
+    else 
+        showAIResponse()
+
+
 }
 
-function showAIResponse(text) {
+function showAIResponse() {
     const modal = document.getElementById('aiModal');
     const textContainer = document.getElementById('aiResponseText');
     if (modal && textContainer) {

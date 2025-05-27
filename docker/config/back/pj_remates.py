@@ -587,19 +587,19 @@ def load_new_data(page):
 
 def main():
     #--Correr siempre, este es el que me los trae y guarda despues en json sin procesar
-    remate_ouput = get_updated_remates(1)
-    print(remate_ouput)
-    #--Esta funcion actualiza las veces publicado o agrega el nuevo Bien 
-    update_all(1)
+    # remate_ouput = get_updated_remates(1)
+    # print(remate_ouput)
+    # #--Esta funcion actualiza las veces publicado o agrega el nuevo Bien 
+    # update_all(1)
     
 
     #--data rationalizer
-    # data = sync_data()    
-    # for item in data:
-    #     item['comments'] = []
-    # with open('data/remates.json', 'w') as f:   
-    #     f.write(json.dumps(data))
-    # print("file run successfully")
+    data = sync_data()    
+    for item in data:
+        item['opinion IA'] = []
+    with open('data/remates.json', 'w') as f:   
+        f.write(json.dumps(data))
+    print("file run successfully")
 
  
 if __name__ == '__main__':

@@ -1,5 +1,7 @@
 from flask import Flask, jsonify, request, send_from_directory
 import os
+from prometheus_client import Counter, Histogram, generate_latest, CONTENT_TYPE_LATEST
+import time
 import json
 
 app = Flask(__name__)
@@ -7,6 +9,34 @@ app = Flask(__name__)
 JSON_FILE_PATH = 'data/remates.json'
 PDF_DIRECTORY = 'pdf/'  # Directory where PDFs are stored
 
+REQUEST_COUNT = Counter(
+    'http_requests_total', 'Total HTTP Requests',
+    ['method', 'endpoint', 'http_status']
+)
+
+REQUEST_LATENCY = Histogram(
+    'http_request_duration_seconds', 'Request latency',
+    ['endpoint']
+)
+
+@app.before_request
+def start_timer():
+    request.start_time = time.time()
+
+@app.after_request
+def record_metrics(response):
+    start_time = getattr(request, 'start_time', None)
+    if start_time:
+        request_latency = time.time() - start_time
+        # Normalize path to avoid high cardinality if needed
+        endpoint = request.path
+        REQUEST_LATENCY.labels(endpoint).observe(request_latency)
+        REQUEST_COUNT.labels(request.method, endpoint, str(response.status_code)).inc()
+    return response
+
+@app.route("/metrics")
+def metrics():
+    return generate_latest(), 200, {'Content-Type': CONTENT_TYPE_LATEST}
 
 def load_remates():
     """Load remates.json if it exists, otherwise return an empty list."""

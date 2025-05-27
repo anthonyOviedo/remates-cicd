@@ -5,9 +5,9 @@ services:
       dockerfile: Dockerfile.report-viewer
     container_name: report-viewer
     ports:
-      - "8081:8081"
-    # depends_on: 
-    #   - python-app
+      - "80:8081"
+    depends_on:
+      - report-engine # This dependency assumes you will define 'python-app' below
 
   report-engine:
     build:
@@ -16,38 +16,49 @@ services:
     container_name: report-engine
     ports:
       - "5001:5001"
-    volumes: # Added this section
+    volumes:
       - ./config/back/data:/reportEngine/data # Maps local './data' to '/reportEngine/data' in the container
 
-  # grafana:
-  #   build:
-  #     context: .
-  #     dockerfile: Dockerfile.grafana
-  #   container_name: grafana
-  #   volumes:
-  #     - grafana-data:/var/lib/grafana
-  #   restart: unless-stopped
+  grafana:
+    build:
+      context: .
+      dockerfile: Dockerfile.grafana
+    container_name: grafana
+    volumes:
+      - grafana-data:/var/lib/grafana
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    depends_on:
+      - prometheus
+
+  prometheus:
+    build:
+      context: .
+      dockerfile: Dockerfile.prometheus
+    container_name: prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - prometheus-data:/prometheus
+    restart: unless-stopped
+    command: --config.file=/etc/prometheus/prometheus.yml
+
+  # ollama:
+  #   image: ollama/ollama:latest
+  #   container_name: ollama-deepseek
+  #   runtime: nvidia
+  #   environment:
+  #     - NVIDIA_VISIBLE_DEVICES=all
   #   ports:
-  #     - "3000:3000"
-  #   depends_on:
-  #     - prometheus
-
-  # prometheus:
-  #   build:
-  #     context: .
-  #     dockerfile: Dockerfile.prometheus
-  #   container_name: prometheus
-  #   ports:
-  #     - "9090:9090"
+  #     - "11434:11434"
   #   volumes:
-  #     - prometheus-data:/prometheus
-  #   restart: unless-stopped
-  #   command: --config.file=/etc/prometheus/prometheus.yml
+  #     - ollama-data:/root/.ollama
 
-  # volumes:
-  #   prometheus-data:
-  #     driver: local
-  #   grafana-data:
-  #     driver: local
-
-
+volumes: # Corrected indentation
+  prometheus-data:
+    driver: local
+  grafana-data:
+    driver: local
+  # ollama-data:
+  #   driver: local

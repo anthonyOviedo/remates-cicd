@@ -1,14 +1,40 @@
 from flask import Flask, request, jsonify, session, send_file, redirect, url_for
+from prometheus_client import Counter, Histogram, generate_latest, CONTENT_TYPE_LATEST
+import time
 import requests
 import os
 
 app = Flask(__name__, static_folder="public", static_url_path="/public")
 app.secret_key = "your_secret_key"  # Required for session management
+REQUEST_COUNT = Counter(
+    'http_requests_total', 'Total HTTP Requests',
+    ['method', 'endpoint', 'http_status']
+)
 
+REQUEST_LATENCY = Histogram(
+    'http_request_duration_seconds', 'Request latency',
+    ['endpoint']
+)
 BACK_SERVER = 'http://report-engine:5001'
 
 # Dummy user database (replace with a real database)
 USERS = {"juan@barrantes": "83670583","minor@oviedo": "88137504", "estiven@oviedo": "87530890", "antony@oviedo": "87898967"}
+
+@app.before_request
+def start_timer():
+    request.start_time = time.time()
+
+@app.after_request
+def record_metrics(response):
+    request_latency = time.time() - request.start_time
+    REQUEST_LATENCY.labels(request.path).observe(request_latency)
+    REQUEST_COUNT.labels(request.method, request.path, response.status_code).inc()
+    return response
+
+@app.route("/metrics")
+def metrics():
+    return generate_latest(), 200, {'Content-Type': CONTENT_TYPE_LATEST}
+
 
 # Middleware to check login
 def login_required(func):
@@ -98,7 +124,7 @@ def ia():
         return jsonify({"error": "Invalid request"}), 400
 
     request_payload = {
-        "model": "deepseek-r1:14b",
+        "model": "deepseek-r1:7b",
         "prompt": payload["prompt"],
         "stream": False,
     }
