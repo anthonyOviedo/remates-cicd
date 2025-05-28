@@ -9,9 +9,7 @@ COPY config/front/server.py /reportViewer
 COPY config/requirements.txt /reportViewer
 
 
-
-
-# Expose port 8080
+# Expose port 8081
 EXPOSE 8081
 
 RUN pip install -r requirements.txt

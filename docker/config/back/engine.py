@@ -101,4 +101,4 @@ def add_remate():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5001, debug=True)  # <--- Ensure host='0.0.0.0'
+    app.run(host='0.0.0.0', port=5001, debug=False)  # <--- Ensure host='0.0.0.0'
