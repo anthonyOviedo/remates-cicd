@@ -67,6 +67,12 @@ def get_remates():
         return send_from_directory(directory=os.getcwd(), path=JSON_FILE_PATH, as_attachment=True)
     
     return jsonify({"error": "File not found"}), 404
+
+
+app.route('/refresh', methods=['GET'])
+def refresh():
+        return jsonify({"error": "not permited"}), 404
+    #execute an external python file called pj_remates.py
     
 
 @app.route('/remates', methods=['POST'])

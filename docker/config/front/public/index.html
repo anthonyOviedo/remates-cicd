@@ -1,51 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Remates</title>
+    <link
+        href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAjPcA////AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEREQAAABEREREQAAAAAREREQAAAAAAEREQARAAARABERABEAAREAERAAEQAREAABAAARAREAAAAAABEREREAAAAAEREREQAAAAARAAARAAAQABEAABEAAREAEREREQAREQARERERABEREAAAAAABERERAAAAABEREREQAAABEREAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+        rel="icon" type="image/x-icon">
     <link rel="stylesheet" href="public/index.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 </head>
+
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <a class="navbar-brand" href="#">Remates Judiciales</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-    
+
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
                     <button class="nav-link btn btn-link" id="show-favorites">Mostrar Favoritos</button>
                 </li>
                 <li class="nav-item">
-                     <button class="nav-link btn btn-link" id="show-all">Mostrar Todos</button>
+                    <button class="nav-link btn btn-link" id="show-all">Mostrar Todos</button>
                 </li>
                 <li class="nav-item">
-                     <a class="nav-link" href="/" id="perfil-link">Perfil</a>
+                    <a class="nav-link" href="/" id="perfil-link">Perfil</a>
                 </li>
                 <li class="nav-item">
-                     <a class="nav-link" href="/logout" id="logout-link">Logout</a>
+                    <a class="nav-link" href="/logout" id="logout-link">Logout</a>
                 </li>
             </ul>
         </div>
     </nav>
-<div class="container">
-    <h1>Lista de Remates</h1>
+    <div class="container">
+        <h1>Lista de Remates</h1>
 
-    <div>
-        <label for="province-filter">Filtrar por Cotenido:</label>
-        <input type="text" oninput="refresh()" id="province-filter" placeholder="Escriba una palabra...">
-        <div id="filtered-count"></div>
+        <div>
+            <label for="province-filter">Filtrar por Cotenido:</label>
+            <input type="text" oninput="refresh()" id="province-filter" placeholder="Escriba una palabra...">
+            <div id="filtered-count"></div>
+        </div>
+
+        <div id="remates-list" class="auction-list"></div>
     </div>
 
-    <div id="remates-list" class="auction-list"></div>
-</div>
-
-<script src="public/index.js"></script>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAWvNi46Mkgr68VD97lEqXDn0IZI0yW/zgTppPrVdHuT2eSH97vKMxVA0AlmGPGet2UqqZ" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <script src="public/index.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAWvNi46Mkgr68VD97lEqXDn0IZI0yW/zgTppPrVdHuT2eSH97vKMxVA0AlmGPGet2UqqZ"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>
 </body>
+
 </html>

@@ -1,8 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link
+        href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAjPcA////AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEREQAAABEREREQAAAAAREREQAAAAAAEREQARAAARABERABEAAREAERAAEQAREAABAAARAREAAAAAABEREREAAAAAEREREQAAAAARAAARAAAQABEAABEAAREAEREREQAREQARERERABEREAAAAAABERERAAAAABEREREQAAABEREAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+        rel="icon" type="image/x-icon">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detalle de la propiedad</title>
@@ -12,28 +19,36 @@
             overflow: hidden;
             transition: max-height 0.3s ease-in-out;
         }
+
         .expanded {
             max-height: none;
         }
+
         .expand-btn {
             color: #007bff;
             cursor: pointer;
             display: block;
             margin-top: 5px;
         }
+
         .dates {
             background: #e9ecef;
             padding: 10px;
             border-radius: 5px;
             margin-top: 10px;
         }
+
         body {
-            background-image: url('public/beach.jpeg'); /* Path is relative to this CSS file */
+            background-image: url('public/beach.jpeg');
+            /* Path is relative to this CSS file */
             font-family: Arial, sans-serif;
             margin: 20px;
-            background-color: #f4f4f4; /* Fallback color if the image doesn't load */
-            background-size: cover; /* Optional: Scales the image to cover the entire background */
-            background-repeat: no-repeat; /* Optional: Prevents the image from repeating */
+            background-color: #f4f4f4;
+            /* Fallback color if the image doesn't load */
+            background-size: cover;
+            /* Optional: Scales the image to cover the entire background */
+            background-repeat: no-repeat;
+            /* Optional: Prevents the image from repeating */
         }
 
         h1 {
@@ -66,20 +81,24 @@
             border: none;
             cursor: pointer;
         }
+
         button {
             background-color: #007bff;
             color: white;
-            padding: 10px; /* Adjust padding for icon size */
+            padding: 10px;
+            /* Adjust padding for icon size */
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            font-size: 1.2em; /* Adjust icon size */
+            font-size: 1.2em;
+            /* Adjust icon size */
             transition: background-color 0.3s ease;
-            margin-right: 5px; /* Add spacing between buttons */
-            }
+            margin-right: 5px;
+            /* Add spacing between buttons */
+        }
 
         button:hover {
-        background-color: #0056b3;
+            background-color: #0056b3;
         }
 
         .form-container {
@@ -167,7 +186,8 @@
             text-decoration: underline;
         }
 
-        input, textarea {
+        input,
+        textarea {
             width: 100%;
             padding: 8px;
             margin-top: 5px;
@@ -177,6 +197,7 @@
         }
     </style>
 </head>
+
 <body>
     <h1>Detalle de la propiedad</h1>
     <br>
@@ -197,7 +218,7 @@
         let item = null;
 
         // Fetch data from server instead of using localStorage
-    // Fix the initial fetch:
+        // Fix the initial fetch:
         fetch('/data')
             .then(res => res.json())
             .then(fetchedData => {
@@ -210,7 +231,7 @@
             .catch(error => {
                 console.error('Error fetching data:', error);
                 data = [];
-        });
+            });
 
         // In refresh function, add let:
         function refresh() {
@@ -232,7 +253,7 @@
         }
 
         // Event listener for favorite button
-        document.addEventListener('click', function(event) {
+        document.addEventListener('click', function (event) {
             if (event.target.classList.contains('favorite-btn')) {
                 const itemId = event.target.closest('.property-item').dataset.id;
                 const item = data.find(item => item.id === itemId);
@@ -302,7 +323,7 @@
             `;
 
             // Handle the form submission
-            document.getElementById('comment-form').addEventListener('submit', function(e) {
+            document.getElementById('comment-form').addEventListener('submit', function (e) {
                 e.preventDefault();
 
                 const commentText = document.getElementById('new-comment').value;
@@ -371,21 +392,21 @@
                 },
                 body: JSON.stringify({ data: remate })
             })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`Server returned ${response.status} ${response.statusText}`);
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log('Server response:', data);
-                if (showingFavorites) {
-                    showFavorites(); // Re-render favorites list to update button
-                } else {
-                    refresh();  //Re-render all.
-                }
-            })
-            .catch(error => console.error('Error sending favorite update:', error));
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`Server returned ${response.status} ${response.statusText}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('Server response:', data);
+                    if (showingFavorites) {
+                        showFavorites(); // Re-render favorites list to update button
+                    } else {
+                        refresh();  //Re-render all.
+                    }
+                })
+                .catch(error => console.error('Error sending favorite update:', error));
         }
 
         function toggleExpand(btn) {
@@ -428,16 +449,17 @@
                 },
                 body: JSON.stringify({ data: item })
             })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`Server returned ${response.status} ${response.statusText}`);
-                }
-                return response.json();
-            })
-            .catch(error => console.error('Error sending favorite update:', error));
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`Server returned ${response.status} ${response.statusText}`);
+                    }
+                    return response.json();
+                })
+                .catch(error => console.error('Error sending favorite update:', error));
         }
 
         document.addEventListener("DOMContentLoaded", refresh);
     </script>
 </body>
+
 </html>

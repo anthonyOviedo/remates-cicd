@@ -596,7 +596,7 @@ def main():
     #--data rationalizer
     data = sync_data()    
     for item in data:
-        item['opinion IA'] = []
+        item['opinion IA'] = ""
     with open('data/remates.json', 'w') as f:   
         f.write(json.dumps(data))
     print("file run successfully")

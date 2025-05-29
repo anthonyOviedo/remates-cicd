@@ -17,7 +17,7 @@ services:
     ports:
       - "5001:5001"
     volumes:
-      - ./config/back/data:/reportEngine/data # Maps local './data' to '/reportEngine/data' in the container
+      - ./config/back/data:/reportEngine/data 
 
   grafana:
     build:
@@ -54,6 +54,8 @@ services:
       - "443:443"
     volumes:
       - ./config/nginx/app.conf:/etc/nginx/conf.d/app.conf:ro
+      - ./certbot:/var/www/certbot
+      - /etc/letsencrypt:/etc/letsencrypt:ro
     depends_on:
       - report-viewer
       - grafana
