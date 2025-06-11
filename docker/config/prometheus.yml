@@ -1,22 +1,23 @@
 ---
 global:
-  scrape_interval: 15s  # By default, scrape targets every 15 seconds.
+  scrape_interval: 15s 
 scrape_configs:
-  # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
   - job_name: 'prometheus'
-    # Override the global default and scrape targets from this job every 5 seconds.
     scrape_interval: 5s
     static_configs:
       - targets: ['prometheus:9090']
 
   - job_name: 'FRONTEND_WEB_SERVER'
-    # Override the global default and scrape targets from this job every 5 seconds.
     scrape_interval: 5s
     static_configs:
       - targets: ['report-viewer:8081']
 
   - job_name: 'BACKEND_WEB_SERVER'
-    # Override the global default and scrape targets from this job every 5 seconds.
     scrape_interval: 5s
     static_configs:
       - targets: ['report-engine:5001']
+
+  - job_name: 'CV'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['cv:880']

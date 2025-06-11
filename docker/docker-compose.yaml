@@ -60,6 +60,14 @@ services:
       - report-viewer
       - grafana
 
+  cv:
+    build:
+      context: .
+      dockerfile: Dockerfile.cv
+    container_name: cv
+    ports:
+      - "880:880"
+
 volumes:
   prometheus-data:
     driver: local
