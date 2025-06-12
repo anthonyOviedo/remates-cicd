@@ -3,6 +3,7 @@ from prometheus_client import Counter, Histogram, generate_latest, CONTENT_TYPE_
 import time
 import requests
 import os
+import io
 
 app = Flask(__name__, static_folder="public", static_url_path="/public")
 app.secret_key = "your_secret_key"  # Required for session management
