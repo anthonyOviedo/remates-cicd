@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Antony Oviedo Portfolio</title>
+  <link rel="stylesheet" href="home/index.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <div class="sidebar">
+    <div class="profile">
+      <img src="home/porfile_image.jpeg" alt="Profile" class="profile-img">
+      <h2 onclick="location.href='/'">Antony Oviedo Alfaro</h2>
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-x"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+      </div>
+    </div>
+    <nav>
+        <ul>
+          <li onclick="loadPage('main')" class="nav-link" style="cursor: pointer;">Home</li>
+          <li onclick="loadPage('about')" class="nav-link" style="cursor: pointer;">About</li>
+          <li onclick="loadPage('portfolio')" class="nav-link" style="cursor: pointer;">Portfolio</li>
+          <li onclick="loadPage('contact')" class="nav-link" style="cursor: pointer;">Contact</li>
+        </ul>
+    </nav>
+  </div>
+
+  <div class="main">
+    <div class="content">
+      <section class="hero">
+        <h1>Hi, I'm Antony.</h1>
+        <p class="subtitle">Systems Engineer & CyberSec Enthusiast</p>
+        <p class="description">I'm passionate about cloud infrastructure, automation, and building scalable, reliable systems. Currently focused on GCP, CI/CD, Kubernetes and Terraform.</p>
+        <a class="cta-button" href="/public/cv/AntonyOviedoCV.pdf">Download CV</a>
+      </section>
+    </div>
+  </div>
+
+  <script src="home/index.js"></script>
+</body>
+</html>

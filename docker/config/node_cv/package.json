@@ -4,5 +4,9 @@
   "main": "cv.js",
   "scripts": {
     "start": "node cv.js"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "pug": "^3.0.3"
   }
 }
