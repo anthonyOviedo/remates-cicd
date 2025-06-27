@@ -13,7 +13,7 @@
 <body>
   <div class="sidebar">
     <div class="profile">
-      <img src="home/porfile_image.jpeg" alt="Profile" class="profile-img">
+      <img src="home/profile_image.jpeg" alt="Profile" class="profile-img">
       <h2 onclick="location.href='/'">Antony Oviedo Alfaro</h2>
       <div class="social-icons">
         <a href="#"><i class="fab fa-x"></i></a>
@@ -22,26 +22,271 @@
       </div>
     </div>
     <nav>
-        <ul>
-          <li onclick="loadPage('main')" class="nav-link" style="cursor: pointer;">Home</li>
-          <li onclick="loadPage('about')" class="nav-link" style="cursor: pointer;">About</li>
-          <li onclick="loadPage('portfolio')" class="nav-link" style="cursor: pointer;">Portfolio</li>
-          <li onclick="loadPage('contact')" class="nav-link" style="cursor: pointer;">Contact</li>
-        </ul>
+      <ul>
+        <li><a href="#section-about" class="nav-link">About</a></li>
+        <li><a href="#section-portafolio" class="nav-link">Proyectos</a></li>
+        <li><a href="#section-contact" class="nav-link">Contact</a></li>
+      </ul>
+
     </nav>
-  </div>
+    
+    <div class="footer">
+    <a 
+      href="https://github.com/anthonyOviedo" 
+      target="_blank" 
+      rel="noopener noreferrer" 
+      class="github-btn"
+    >
+      <img 
+        src="home/github-mark.png" 
+        alt="GitHub Logo" 
+        class="github-logo"
+      >
+    </a>
 
-  <div class="main">
-    <div class="content">
-      <section class="hero">
-        <h1>Hi, I'm Antony.</h1>
-        <p class="subtitle">Systems Engineer & CyberSec Enthusiast</p>
-        <p class="description">I'm passionate about cloud infrastructure, automation, and building scalable, reliable systems. Currently focused on GCP, CI/CD, Kubernetes and Terraform.</p>
-        <a class="cta-button" href="/public/cv/AntonyOviedoCV.pdf">Download CV</a>
-      </section>
+    <a 
+      href="https://www.linkedin.com/in/anthony-oviedo-9b8381153/" 
+      target="_blank" 
+      rel="noopener noreferrer" 
+      class="github-btn"
+    >
+      <img 
+        src="home/linkedin-mark.png" 
+        alt="linkedin Logo" 
+        class="github-logo"
+      >
+    </a>
+    <a href="/home/AntonyOviedoCV.pdf" download title="Download CV" class="github-btn">
+      <img src="home/download-mark.svg" alt="download logo" class="github-logo">
+    </a>
     </div>
+
   </div>
 
-  <script src="home/index.js"></script>
+    <div class="main">
+      <div class="content">
+
+        <div class="titulo">
+          <h1 class="subtitle">Systems Engineer & DevOps Specialist</h1>
+          <p class="description">
+            I love fixing pc and....
+          </p>
+        </div>
+
+        <section id="section-about" data-text="Sobre mí">
+          <div class="content-row">
+            <div class="about-block">
+              <h3 class="subsection-title">¿Quién soy?</h3>
+              <p class="description">
+                Ingeniero en sistemas enfocado en automatización, ciberseguridad y tecnología. Me apasiona resolver problemas complejos.
+              </p>
+            </div>
+
+            <div class="about-block">
+              <h3 class="subsection-title">Mi historia</h3>
+              <p class="description">
+                Desde joven guiado por la curiosidad. La ingeniería fue mi camino natural para transformar ideas en soluciones reales.
+              </p>
+            </div>
+
+            <div class="about-block">
+              <h3 class="subsection-title">Mis valores</h3>
+              <p class="description">
+                Honestidad, compromiso, vocación de servicio, aprender y enseñar, trabajo en equipo y curiosidad constante.
+              </p>
+            </div>
+
+            <div class="about-block">
+              <h3 class="subsection-title">Lo que hago</h3>
+              <p class="description">
+                Desarrollo soluciones web, automatizaciones, infraestructura cloud y más. Siempre con seguridad y eficiencia como base.
+              </p>
+            </div>
+
+            <div class="about-block">
+              <h3 class="subsection-title">Diferenciales</h3>
+              <p class="description">
+                Escucho, analizo, resuelvo. Me adapto rápido y entrego valor técnico con empatía y visión de negocio.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section  data-text="Redes...">
+          <h2 class="subtitle">Redes</h2>
+          <p class="description">
+            La experiencia y curiosidad me han llevado a explorar el fascinante mundo de las redes desde nino, haciendo mis primeras configuraciones en un router domestico para tener la mejor conexion para jugar en linea,
+            posteriormente en paralelo con la carrera de ingenieria, me gradue como tecnico en redes del ICAI (Proyecto de la  Universidad Nacional de Costa Rica), gracias a ello
+            ralice varios trrabajos de cableado y configuracion de redes locales para uso de un local de comidas, siguiendo mi passion por las redes, me certifique como CCNA (Cisco Certified Network Associate)
+            y dedique mas de dos annos a impartir clases sobre redes en el mismo instituto donde me gradue, ICAI, donde pude compartir mis conocimientos y experiencias con estudiantes que deseaban aprender sobre redes.
+            sin duda una experiencia enriquecedora que me permitio profundizar en el tema y ayudar a otros a comprender la importancia de las redes en el mundo actual.
+            como parte de metodologia de ensenannza, siempre me gusta relaizar laboratorios practicos, donde entiendan el llamado "BIG PICTURE" en la importancia de las redes asi mismo saliendome de lo normal eh irr un paso mas alla del entendimiento.
+            
+            Aunque la ensenannza es increible, debia seguir adelante y buscar nuevos retos, por lo que decidi conocer la competencia de la industria y Juniper me abro las puertas, me certifique y durante un anno completo
+            trabaje como ingeniero de soporte, donde pude aplicar mis conocimientos en redes y aprender de los desafios que enfrentan las empresas en este campo.
+            Ademas de lidear con problemas complejos y urgentes, tuve la oportunidad de colaborar con equipos de diferentes partes del mundo, lo que me permitio ampliar mi perspectiva y comprender mejor las necesidades de los clientes.
+            Parte del trabajo como tecnico de soporte es comunicar problemas de software a los ingenieros de desarrollo, y en mi caso, pude identificar y comunicar problemas de software que afectaban a los clientes, lo que me permitio contribuir al desarrollo de soluciones efectivas.
+            lo que me hizo darme cuenta de lo interconectados que estan las redes y el software y de lo mucho que soy capaz de entender ambos mundos.
+
+            Actualmente, mi trabajo esta mas enfocado en la infraestructura de la nube, pero mi experiencia en redes sigue siendo fundamental para comprender y resolver problemas complejos en este campo.
+            Me apasiona seguir aprendiendo y creciendo en este campo, y estoy emocionado por las oportunidades que se presenten en el futuro.
+
+          </p>
+        </section>
+
+        <section data-text="LINUX">
+        
+          <h2 class="subtitle">Linux</h2>
+        
+          <p class="description">
+            Mi interes por linux nace de la premisa software libre, y de la necesidad de alejarrme de softweare comercial; en la Universidad es cuando desarrollo un mayor interes por el sistema operativo, ya que me doy cuenta de que es una herramienta poderosa y versatil que me permite personalizar mi entorno de trabajo y adaptarlo a mis necesidades, ademas es gratis. 
+            Desde entonces, he estado explorando diferentes distribuciones de Linux y aprendiendo a utilizar sus herramientas y comandos para mejorar mi productividad y eficiencia en el trabajo.
+            Aprendi mis fundamentos con MINT, pero aprendi a fondo usando junos OS (FreeBSD) lo cual me dio una perspectiva unica de los funcionamientos internos de unix, He trabajado con varias distribuciones de Linux, incluyendo Ubuntu, Debian, Fedora y CentOS, RHEL, kali
+            siendo ubuntu mi desktopOs, centos en mi servidores web personales y RHEL en la mayoria de proyectos empresariales. No es que no me guste windows, pero prefiero la flexibilidad, transpariencia, seeguridad, estabilidad pero sobre todo, la simplicidad de linux para
+            resolver 90% de los problemas informaticos.
+            En fin, abajo windows, arriba linux y macOs puede quedarse en su esquina.   
+          </p>
+        </section>
+
+        <section data-text="Automatizacion">
+          
+          <h2 class="subtitle"> Automatizacion</h2>
+            <p class="description">
+              Hacer mi vida mas facil y eficientes es uno de mis objetivos principales, y la automatizacion es una herramienta clave para lograrlo. desde la automatizacion de tareas repetitivas en casa hasta la implementacion de pipelines de CI/CD, No hay situacion o proceso de esta vida en la que no se pueda mejorar a travez del software es por ello que parte de mis objetivos en la vida es consolidar el servicio de home automations  
+            </p>
+            
+        </section>
+
+        <section data-text="DEVOPS">
+          
+          <h2 class="subtitle"> DevOps</h2>
+          <p class="description">
+            La *automatizacion* de procesos es una de mis pasiones, sindo DevOps mi fuerte en esta industria.
+            Para resolver muchos de los retos que se presentaron en mi mas actual rol de trabajo como ingeniero DEVOPS, se utilizaron herramientas como Terraform, Ansible/chef, Jenkins/GH actions, Docker/podman, Kubernetes, datadog, grafana, prometheus, cyberark, vault, AWS, GCP, pagerduty, nexus, nexusIQ, sonarqube, y github enterprise como SAAS
+            la mayoria de estas herrramientas fueron implementadas, remplazadas o eliminadas dependiendo de la fase del Proyecto; 
+            Aunque existen documetos como el engineer handbook que dicatan los estandares para la implementacion del software no siempre son respetados, es por ello que Tambien eh trabajado en la implentacion de un backstage o Tambien llamado portal de desarrollador, lo cual consider es una de las etapas mas maduras en cuestion de Desarrollo de software en una empresa 
+          </p>
+        </section>
+
+        <section data-text="FULLSTACK">
+          
+          <h2 class="subtitle"> Desarrollo </h2>
+          <p class="description">
+          nada de lo que eh descrito hasta aqui hubiera sido posible sin el desarrollo de software, y aunque no soy un desarrollador fullstack a tiempo completo, si tengo conocimientos intermedios de desarrollo web, y de programacion en general, lo cual me permite entender mejor los procesos de desarrollo y colaborar con los equipos de desarrollo para mejorar la calidad del software.
+          Ademas de ser algo altamente necesario para la automatizacion de procesos, el desarrollo de software es una herramienta poderosa para resolver problemas complejos y crear soluciones innovadoras.
+          He trabajado con varios lenguajes de programacion a lo largo de los annos, incluyendo bash, Python, JavaScript, Java, y C++, javascript, groovy, y he utilizado frameworks como Flask, Django, React, y Angular para desarrollar aplicaciones web y APIs.
+          Me gusta seguir aprendiendo y explorando nuevas tecnologias y herramientas nuevas de desarrollo. No se puede ser un DevOps sin entender el trabajo del desarrollador
+          </p>
+        </section>
+        
+        <section data-text="cybersecurity">
+          
+          <h2 class="subtitle"> Cybersecurity </h2>
+          <p class="description">
+            cybersecurity, donde los hackers si parecen magos de la computacion, siempre hubo una gran curiosidad por entender como funcionan las cosas, y la seguridad cibernetica no es la excepcion.
+            Mi primer acercamiento con las redes fue gracias a todas las buenas practicas de seguridad que me enseñaron en el tecnico, auynque probebalemente ya sabia mas que la mayoria de un desarrollador promedio, el gran temor de meterme a cyber estaba ahi, hasta que en una de las empresas donde trabaje me hizo darme cuenta de que la seguridad cibernetica no es solo para expertos, sino que cualquier persona puede aprender y aplicar buenas practicas de seguridad para proteger sus sistemas y datos.
+
+            La seguridad cibernetica es un tema de gran importancia en la actualidad, y aunque no soy un experto en el tema, tengo conocimientos avanzados sobre las mejores practicas de seguridad y las herramientas necesarias para proteger los sistemas y datos.
+            He trabajado con herramientas como firewalls, IDS/IPS, VPNs, secrets mannagers,  y sistemas de autenticacion multifactor para proteger los sistemas y datos de posibles amenazas.
+            todo esto eh logrado sin realmente ser un profecional en la materia, dichos logros me impulsaron a certificarme en ISC2 entry cert y Security+, lo cual rectifico mi base solida en los conceptos y principios de la seguridad cibernetica construdia unicamente con la experiencia, ademas de aprender sobre las amenazas y vulnerabilidades mas comunes, asi como las mejores practicas para proteger los sistemas y datos pero lo mas interesante son las formas en las que las vulnerabilidades son encontradas y explotas
+            
+            Actualmente, estoy interesado en seguir aprendiendo y explorando nuevas tecnologias y herramientas de seguridad cibernetica, pero mas importante aun, es la integracion de la seguridad en el ciclo de vida del desarrollo de software, lo que se conoce como DevSecOps, y es aqui hacia donde me dirijo actualemente.
+          
+          </p>
+        </section>
+
+        <section id="section-portafolio" data-text="Portfolio">
+          <h1 class="subtitle">Mis proyectos personales</h1>
+
+          <div class="portfolio">
+            <div class="portfolio-item">
+              <a href="https://remate.tonyspublic.info/" target="_blank">
+                <img src="home/remate-preview.png" alt="Remate App" class="portfolio-image" />
+              </a>
+              <div class="portfolio-description">
+                <h3>Remate App</h3>
+                <p>Una plataforma web para subastas desarrollada con Flask y JS, con sistema de favoritos, autenticación y funcionalidades IA.</p>
+              </div>
+            </div>
+
+            <!-- Otro proyecto -->
+            <div class="portfolio-item">
+              <a href="https://preguntame.tonyspublic.info" target="_blank">
+                <img src="home/otro-preview.png" alt="Otro Proyecto" class="portfolio-image" />
+              </a>
+              <div class="portfolio-description">
+                <h3>Otro Proyecto</h3>
+                <p>Descripción breve de otro proyecto personal o profesional.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="section-contact" data-text="Contáctame">
+          <h1 class="subtitle">Contáctame</h2>
+
+              <h3>Email profesional</h3>
+              <p><a href="mailto:antony-08@hotmail.com">antony-08@hotmail.com</a></p>
+              <p><a href="mailto:antoviedo9700@gmail.com">antoviedo9700@gmail.com</a></p>
+              
+              <h3>Teléfono</h3>
+              <p><a href="tel:+50687898967">+506 8789 8967</a></p>
+
+              <h3>GitHub</h3>
+              <p><a href="https://github.com/anthonyOviedo" target="_blank">Antony GitHub page</a></p>
+
+              <h3>LinkedIn</h3>
+              <p><a href="https://www.linkedin.com/in/anthony-oviedo-9b8381153/"  target="_blank">linkedin.com/in/antony-oviedo</a></p>
+
+              <h3>Obtener Hoja de vida.</h3>
+              <p><a href="/home/AntonyOviedoCV.pdf" download title="Download CV">Descargar curriculum vita</a></p>
+        </section>
+
+      </div>
+      
+    </div>
+
 </body>
+<script>
+  // Activa la sección visible en el viewport
+  window.addEventListener('scroll', () => {
+    const sections = document.querySelectorAll('.content section');
+    const fromTop = window.scrollY + window.innerHeight / 2;
+
+    sections.forEach(section => {
+      section.classList.remove('active');
+      const top = section.offsetTop;
+      const bottom = top + section.offsetHeight;
+      if (fromTop >= top && fromTop < bottom) {
+        section.classList.add('active');
+      }
+    });
+  });
+
+  // Función de scroll al hacer clic en el menú
+  function loadPageAndScroll(sectionName) {
+    const target = document.getElementById(`section-${sectionName}`);
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+    window.addEventListener('wheel', scrollHandler, { passive: false });
+
+    window.loadPageAndScroll = function (sectionName) {
+      const target = document.getElementById(`section-${sectionName}`);
+      if (target) {
+        const index = sections.findIndex(sec => sec === target);
+        if (index !== -1) {
+          current = index;
+          content.style.transform = `translateY(-${current * 100}vh)`;
+          updateActiveSection();
+          setTimeout(() => {
+            target.scrollIntoView({ behavior: 'smooth' });
+          }, 50);
+        }
+      }
+    };
+</script>
+
+
 </html>

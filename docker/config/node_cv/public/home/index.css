@@ -1,101 +1,260 @@
-body {
+/* Reset y layout base */
+* {
   margin: 0;
-  font-family: Arial, sans-serif;
-  display: flex;
+  padding: 0;
+  box-sizing: border-box;
 }
 
+h1, h2{
+  font-size: 2rem;
+  margin: 10px;
+  padding: 10px;
+  text-align: left;
+}
+
+p {
+  font-size: 1.2rem;
+  color: #161616; /* Gray-500 */
+  margin: 10px;
+  padding: 10px;
+}
+
+/* ↓ añadido: bloquea scroll “normal” para manejarlo con JS */
+html, body {
+  font-family: 'Inter', sans-serif;
+  background-color: #c4c5c0; /* Gray-100 */
+  height: 100%;
+  overflow: hidden; /* ← antes sólo overflow-x */
+}
+
+/* Sidebar fija */
 .sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 240px;
+  height: 100vh;
   background-color: #0f172a;
   color: white;
-  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding-top: 20px;
+  z-index: 1000;
 }
+
+
+.main {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 240px;
+  right: 0;
+  background-size: cover;
+  overflow: hidden; /* Mantén este si solo quieres scroll en .content */
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  position: relative;
+  flex: 1;
+  overflow-y: auto; /* Habilita scroll vertical */
+  height: 100vh;     /* Asegura altura para scroll */
+  transition: transform 0.7s ease;
+}
+
+section {
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 2rem;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+  overflow: visible; /* ← asegúrate de no bloquear contenido */
+}
+
+
+/* ↓ añadido: sección visible */
+section.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* titulo igual que antes, simplemente ocupa 100vh */
+.titulo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
+  color: rgb(10, 10, 10);
+}
+
+/* Resto de estilos sin cambios */
 .profile {
   text-align: center;
   margin-bottom: 20px;
 }
-
-
 .profile-img {
-  margin: auto;
-  padding: 10px;
-
+  width: 80px;
   height: 80px;
   border-radius: 50%;
   object-fit: cover;
-  position: relative;
+  margin-bottom: 10px;
 }
-
 .profile h2 {
-  margin: 10px 0;
   font-size: 18px;
   cursor: pointer;
-  color: rgb(143, 139, 139); /* Set base color */
+  color: rgb(143, 139, 139);
   transition: color 0.3s ease, transform 0.3s ease;
 }
-
 .profile h2:hover {
-  color: #faf4f4;        /* Hover color */
-  transform: scale(1.05); /* Slight zoom effect */
+  color: #ffffff;
+  transform: scale(1.05);
 }
-
 .social-icons {
   display: flex;
   gap: 10px;
   margin-bottom: 20px;
 }
-
 .social-icons a {
-  color: white;
   font-size: 14px;
+  color: white;
   text-decoration: none;
 }
 
-nav ul {
-  list-style: none;
-  padding: 0;
+nav {
+  align-items: center;
+  justify-content: center;
+  justify-self: center;
 }
 
+nav ul {
+  align-items: center;
+  justify-content: center;
+  list-style: none;
+  width: 100%;
+}
 nav ul li {
-  padding: 10px 20px;
+  padding: 10px ;
   cursor: pointer;
   color: #cbd5e1;
+  transition: background 0.3s, color 0.3s;
 }
 
-nav ul li.active, nav ul li:hover {
+
+nav ul li:hover,
+nav ul li.active {
   background-color: #1e293b;
   color: white;
 }
 
-.main {
-  flex: 1;
-  background: url('background.jpeg');
-  background-size: cover;
-  position: relative;
-}
-
-.content {
-  position: absolute;
-  top: 20%;
-  left: 10%;
+.cta-button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #2563eb; /* Blue-600 */
   color: white;
-}
-
-.content h1 {
-  font-size: 40px;
-  margin: 0;
-}
-
-.content p {
-  font-size: 20px;
-}
-
-.highlight {
-  color: #010a0e;
+  border-radius: 5px;
+  text-decoration: none;
   font-weight: bold;
+  transition: background-color 0.3s ease;
+}
 
+
+/* styles.css */
+.github-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background-color: #ffffff00;
+  color: #fff;
+  text-decoration: none;
+  font-family: Arial, sans-serif;
+  font-size: 1rem;
+  transition: background-color 0.3s ease, transform 0.1s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.github-btn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+}
+
+.github-btn:active {
+  transform: scale(0.95);
+  box-shadow: 0 2px 6px rgba(255, 255, 255, 0.1);
+}
+
+.github-logo {
+  width: 1.2rem;
+  height: auto;
+  margin-right: 0.5rem;
+}
+
+.contact-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+
+.contact-item {
+  flex: 1 1 200px;
+  min-width: 200px;
+}
+
+.footer {
+  margin-top: auto;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1rem 0;
+}
+
+.footer .github-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.footer .github-logo {
+  width: 24px;
+  height: 24px;
+}
+
+.portfolio {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.portfolio-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+}
+
+.portfolio-image {
+  width: 200px;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+.portfolio-description {
+  max-width: 600px;
+}
+
+.portfolio-description h3 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.portfolio-description p {
+  margin: 0.5rem 0 0;
+  font-size: 1rem;
 }
