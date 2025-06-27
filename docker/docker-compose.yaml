@@ -67,7 +67,10 @@ services:
     container_name: cv
     ports:
       - "880:880"
-
+    volumes:
+      - ./config/node_cv/public:/usr/src/app/public
+      - ./config/node_cv/pages:/usr/src/app/pages
+    
 volumes:
   prometheus-data:
     driver: local
